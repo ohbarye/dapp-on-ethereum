@@ -7,13 +7,6 @@
     "migrate": "rm -rf build && truffle migrate --reset --compile-all --network development",
     "test": "concurrently \"yarn run ganache\" \"sleep 2 && truffle test --network test\""
   },
-  "config": {
-    "ganache": {
-      "networkId": 5777,
-      "gasPrice": 20000000000,
-      "gasLimit": 6721975
-    }
-  },
   "author": "ohbarye",
   "license": "ISC",
   "devDependencies": {
