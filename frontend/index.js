@@ -6,23 +6,25 @@ import MetaCoin from "../build/contracts/MetaCoin.json";
 import Web3 from "web3";
 
 // Is there is an injected web3 instance?
-if (typeof web3 !== "undefined") {
-  const web3 = new Web3("ws://localhost:8545");
+if (window.ethereum) {
+  const web3 = new Web3(window.ethereum || "ws://localhost:8545");
 
-  // to check if it works
-  web3.eth.getAccounts().then((accounts) => {
-    const metacoinABI = MetaCoin.abi;
-    const metacoinAddress = "0xE97b7eb6AE732248d0FE5BA25A762D436C5dBf22"; // TODO: how to get this dynamically?...unnecessary?
-    const metacoin = new web3.eth.Contract(metacoinABI, metacoinAddress);
-    console.log(metacoin);
-    console.log(accounts);
-    metacoin.methods.getBalanceInEth(accounts[0]).call().then(console.log);
-  });
+  // Need permission: https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
+  async () => {
+    await window.ethereum.enable();
+  };
+
+  const metacoinABI = MetaCoin.abi;
+  const metacoinAddress = "0xE97b7eb6AE732248d0FE5BA25A762D436C5dBf22"; // TODO: how to get this dynamically?...unnecessary?
+  const metacoin = new web3.eth.Contract(metacoinABI, metacoinAddress);
+
+  ReactDOM.render(
+    <App web3={web3} contract={metacoin} />,
+    document.getElementById("root")
+  );
 } else {
   alert("You need to install Metamask!");
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));
 
 // Hot Module Replacement
 if (module.hot) {
