@@ -1,3 +1,5 @@
 .ethash/
+.cache/
 build/
+dist/
 eth_private_net/

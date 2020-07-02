@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "scripts": {
     "ganache": "ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --gasPrice $npm_package_config_ganache_gasPrice --mnemonic \"$MNEMONIC\"",
-    "start": "concurrently \"yarn run ganache\" \"yarn run migrate\"",
+    "start": "concurrently \"yarn run ganache\" \"yarn run migrate\" \"yarn dev\"",
     "migrate": "rm -rf build && truffle migrate --reset --compile-all --network development",
-    "test": "concurrently \"truffle develop\" \"sleep 2 && truffle test --network test\""
+    "test": "concurrently \"truffle develop\" \"sleep 2 && truffle test --network test\"",
+    "dev": "parcel ./frontend/index.html"
   },
   "author": "ohbarye",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.2.0",
     "ganache-cli": "^6.10.0-beta.2",
+    "parcel-bundler": "^1.12.4",
     "truffle": "^5.1.32"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
