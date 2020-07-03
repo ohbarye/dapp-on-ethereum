@@ -1,6 +1,9 @@
 {
   "name": "eth",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "ganache": "ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --gasPrice $npm_package_config_ganache_gasPrice --mnemonic \"$MNEMONIC\"",
     "start": "concurrently \"yarn run ganache\" \"yarn run migrate\" \"yarn dev\"",
