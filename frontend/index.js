@@ -5,9 +5,10 @@ import { App } from "./App";
 import MetaCoin from "../build/contracts/MetaCoin.json";
 import Web3 from "web3";
 
-// Is there is an injected web3 instance?
 if (window.ethereum) {
-  const web3 = new Web3(window.ethereum || "ws://localhost:8545");
+  // It assumes window.ethereum is provided by Metamask
+  // If you'd like to directly connect a private network on local, use "ws://localhost:8545" instead.
+  const web3 = new Web3(window.ethereum);
 
   // Need permission: https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
   async () => {
@@ -15,7 +16,9 @@ if (window.ethereum) {
   };
 
   const metacoinABI = MetaCoin.abi;
-  const metacoinAddress = "0xE97b7eb6AE732248d0FE5BA25A762D436C5dBf22"; // TODO: How can I get this dynamically?
+  const metacoinAddress = Object.values(MetaCoin.networks).map(
+    ({ address }) => address
+  )[0];
   const metacoin = new web3.eth.Contract(metacoinABI, metacoinAddress);
 
   ReactDOM.render(
