@@ -15,7 +15,7 @@ if (window.ethereum) {
   };
 
   const metacoinABI = MetaCoin.abi;
-  const metacoinAddress = "0xE97b7eb6AE732248d0FE5BA25A762D436C5dBf22"; // TODO: how to get this dynamically?...unnecessary?
+  const metacoinAddress = "0xE97b7eb6AE732248d0FE5BA25A762D436C5dBf22"; // TODO: How can I get this dynamically?
   const metacoin = new web3.eth.Contract(metacoinABI, metacoinAddress);
 
   ReactDOM.render(
